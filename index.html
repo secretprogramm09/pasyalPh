@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5f7f4" />
+    <title>Pasyal ph</title>
+    <script>
+      try {
+        if (localStorage.getItem("pasyal-dashboard-theme") === "dark") {
+          document.documentElement.dataset.theme = "dark";
+        }
+      } catch {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;650;700;750;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-icon">
+            <img
+              class="brand-logo-image"
+              id="brandLogoImage"
+              src="assets/pasyal-ph-logo.jpg"
+              alt="Pasyal PH logo"
+              hidden
+            />
+            <svg
+              id="brandLogoFallback"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path
+                d="M3 11.5 12 4l9 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"
+              />
+              <path
+                d="M8 20v-6h8v6M7.5 9.5c2.5 1 5 .5 7-2M6 6c1.3.1 2.1.7 2.6 1.8"
+              />
+            </svg>
+          </div>
+          <div>
+            <div class="brand-name">Pasyal ph</div>
+            <div class="brand-sub">DISCOVER THE PHILIPPINES</div>
+          </div>
+        </div>
+        <div class="nav-label">Workspace</div>
+        <nav class="nav" id="nav">
+          <a class="active" href="#dashboard" data-page="Dashboard"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <rect x="3" y="3" width="8" height="8" rx="2" />
+              <rect x="14" y="3" width="7" height="5" rx="2" />
+              <rect x="14" y="11" width="7" height="10" rx="2" />
+              <rect x="3" y="14" width="8" height="7" rx="2" /></svg
+            >Dashboard</a
+          ><a href="#restaurants" data-page="Restaurants"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path
+                d="M4 3v7a3 3 0 0 0 6 0V3M7 3v18M20 11h-7c0-4 2-8 5-8v18"
+              /></svg
+            >Restaurants</a
+          ><a href="#airbnb" data-page="Airbnb Listings"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="m3 11 9-8 9 8v9H3zM8 20v-6h8v6M6 8l6 5 6-5" /></svg
+            >Airbnb Listings</a
+          ><a href="#map" data-page="Map Manager"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15" />
+              <circle cx="12" cy="9" r="2" /></svg
+            >Map Manager</a
+          ><a href="#comments" data-page="Comments"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path
+                d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l-2 2v-9.5A7.5 7.5 0 1 1 20 11.5Z"
+              /></svg
+            >Comments</a
+          ><a href="#reports" data-page="Reports"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="m12 3 10 18H2z" />
+              <path d="M12 9v5m0 3h.01" /></svg
+            >Reports<span class="count" id="reportNavCount" hidden>0</span></a
+          ><a href="#users" data-page="Users"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path
+                d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m15 0v-2a4 4 0 0 0-3-3.87M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7-7.87a4 4 0 0 1 0 7.75"
+              /></svg
+            >Users</a
+          ><a href="#analytics" data-page="Analytics"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <path d="M3 3v18h18M8 16V9m5 7V5m5 11v-5" /></svg
+            >Analytics</a
+          ><a href="#settings" data-page="Settings"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a7.7 7.7 0 0 1-1.7 1l-.3 1.8h-2.8l-.4-1.8a7.7 7.7 0 0 1-1.7-1l-1.7.6-1.4-2.4L6 15a7 7 0 0 1 0-2l-1.4-1.1L6 9.5l1.7.6a7.7 7.7 0 0 1 1.7-1l.4-1.8h2.8l.3 1.8a7.7 7.7 0 0 1 1.7 1l1.7-.6 1.4 2.4-1.4 1.1a7 7 0 0 1 .1 2Z"
+              /></svg
+            >Settings</a
+          >
+        </nav>
+        <div class="side-bottom">
+          <div class="help-card">
+            <strong>Need a hand?</strong>
+            <p>
+              Our support team is here to help you make every journey count.
+            </p>
+            <a href="mailto:hello@Pasyal.ph">Visit help center ↗</a>
+          </div>
+          <nav class="nav">
+            <a href="#logout" id="logout"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <path
+                  d="M10 17l5-5-5-5m5 5H3m9-9h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-8"
+                /></svg
+              >Logout</a
+            >
+          </nav>
+        </div>
+      </aside>
+      <main class="workspace">
+        <header class="topbar">
+          <button
+            class="icon-btn mobile-menu"
+            id="mobileMenu"
+            aria-label="Open navigation"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div class="crumb">
+            PasyalPH <span style="color: #c3cbc3"> / </span>
+            <b id="crumbPage">Dashboard</b>
+          </div>
+          <div class="top-actions">
+            <button
+              class="icon-btn theme-toggle"
+              id="themeToggle"
+              type="button"
+              aria-label="Switch to dark mode"
+              aria-pressed="false"
+              title="Switch to dark mode"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                <path d="M20.5 15.2A8.5 8.5 0 0 1 8.8 3.5a8.5 8.5 0 1 0 11.7 11.7Z" />
+              </svg>
+            </button>
+            <button
+              class="icon-btn"
+              id="notificationBtn"
+              aria-label="Notifications"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <path
+                  d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12a2 2 0 0 0 4 0"
+                /></svg
+              ><span class="notice-dot"></span></button
+            ><img
+              class="avatar"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces"
+              alt="Administrator"
+            />
+            <div class="admin-label">
+              <b>Maria Santos</b><br /><span style="color: #929d94"
+                >Super admin</span
+              >
+            </div>
+            <button class="profile-edit-trigger" id="editProfile" type="button">
+              Edit profile
+            </button>
+          </div>
+        </header>
+        <section class="welcome">
+          <div>
+            <h1>Welcome back, <span id="welcomeAdminName">Admin</span> 👋</h1>
+            <p>Here’s what’s happening across your travel community today.</p>
+          </div>
+          <div class="date-pill">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            >
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M16 3v4M8 3v4M3 10h18" /></svg
+            ><span id="currentDate"></span>
+          </div>
+        </section>
+        <section class="stats">
+          <article class="stat">
+            <div class="stat-top">
+              <span class="stat-label">Total Restaurants</span
+              ><span class="stat-icon"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                >
+                  <path
+                    d="M4 3v7a3 3 0 0 0 6 0V3M7 3v18M20 11h-7c0-4 2-8 5-8v18"
+                  /></svg
+              ></span>
+            </div>
+            <div class="stat-value" id="restaurantCount">0</div>
+            <div class="stat-foot">
+              <span id="restaurantFoot">Live records from Firebase</span>
+            </div>
+          </article>
+          <article class="stat">
+            <div class="stat-top">
+              <span class="stat-label">Total Airbnb Listings</span
+              ><span
+                class="stat-icon"
+                style="background: #fff2ee; color: #d7785c"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                >
+                  <path d="m3 11 9-8 9 8v9H3zM8 20v-6h8v6M6 8l6 5 6-5" /></svg
+              ></span>
+            </div>
+            <div class="stat-value" id="airbnbCount">0</div>
+            <div class="stat-foot">
+              <span id="airbnbFoot">Live records from Firebase</span>
+            </div>
+          </article>
+          <article class="stat">
+            <div class="stat-top">
+              <span class="stat-label">Active Locations</span
+              ><span
+                class="stat-icon"
+                style="background: #f3effb; color: #8067b3"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                >
+                  <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                  <circle cx="12" cy="10" r="2.5" /></svg
+              ></span>
+            </div>
+            <div class="stat-value" id="activeLocationCount">0</div>
+            <div class="stat-foot">
+              <span id="activeLocationFoot">Unique active listing areas</span>
+            </div>
+          </article>
+          <article class="stat">
+            <div class="stat-top">
+              <span class="stat-label">Pending Reports</span
+              ><span
+                class="stat-icon"
+                style="background: #fff5e8; color: #d39437"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                >
+                  <path d="m12 3 10 18H2z" />
+                  <path d="M12 9v5m0 3h.01" /></svg
+              ></span>
+            </div>
+            <div class="stat-value" id="pendingReportCount">0</div>
+            <div class="stat-foot">
+              <span id="pendingReportFoot">Reports awaiting review</span>
+            </div>
+          </article>
+        </section>
+        <section class="content-grid">
+          <section class="panel form-panel" id="addListing">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Add a new listing</div>
+                <div class="panel-subtitle">Grow the local discovery map</div>
+              </div>
+              <span style="color: #79a581; font-size: 15px">＋</span>
+            </div>
+            <form class="form-body" id="listingForm">
+              <div class="field">
+                <label for="type">Listing type</label
+                ><select id="type">
+                  <option>Restaurant</option>
+                  <option>Airbnb</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="name">Business name</label
+                ><input id="name" placeholder="e.g. Balay Dako" required />
+              </div>
+              <div class="field">
+                <label for="description">Description</label
+                ><textarea
+                  id="description"
+                  placeholder="A short introduction to this place..."
+                ></textarea>
+              </div>
+              <div class="field">
+                <label for="address">Address</label
+                ><input
+                  id="address"
+                  placeholder="Street, city or province"
+                  required
+                />
+                <div class="address-actions">
+                  <button class="btn-ghost address-locate" id="locateAddress" type="button">Locate address</button>
+                  <span class="address-hint" id="addressStatus">Enter a Philippine address to place its map pin.</span>
+                </div>
+                <div class="address-results" id="addressResults" aria-live="polite"></div>
+              </div>
+              <div class="field">
+                <label for="phone">Contact number</label
+                ><input id="phone" type="tel" placeholder="+63 9XX XXX XXXX" />
+              </div>
+              <div class="coords">
+                <div class="field">
+                  <label for="lat">Latitude</label
+                  ><input
+                    id="lat"
+                    type="number"
+                    step="any"
+                    min="4.3"
+                    max="21.5"
+                    inputmode="decimal"
+                    placeholder="Click the map to set"
+                    aria-describedby="addressStatus"
+                  />
+                </div>
+                <div class="field">
+                  <label for="lng">Longitude</label
+                  ><input
+                    id="lng"
+                    type="number"
+                    step="any"
+                    min="116"
+                    max="127.5"
+                    inputmode="decimal"
+                    placeholder="Click the map to set"
+                    aria-describedby="addressStatus"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label>Cover image</label
+                ><label class="upload" for="cover"
+                  ><span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                    >
+                      <path
+                        d="M12 16V4m0 0L8 8m4-4 4 4M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"
+                      /></svg
+                    ><br /><b>Click to upload</b> or drag an image<br /><span
+                      id="fileName"
+                      >JPG or PNG · Max 5 MB</span
+                    ></span
+                  ></label
+                ><input
+                  id="cover"
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  hidden
+                />
+              </div>
+              <div class="button-row">
+                <button class="btn-primary" type="submit">
+                  Save listing <span>→</span></button
+                ><button class="btn-ghost" type="reset">Clear</button>
+              </div>
+            </form>
+          </section>
+          <section class="panel map-panel" id="mapPanel">
+            <div class="map-header">
+              <div>
+                <div class="panel-title">Explore the map</div>
+                <div class="panel-subtitle">
+                  Philippines only · pins use saved listing coordinates
+                </div>
+              </div>
+              <div class="map-tools">
+                <button class="map-tool" title="Zoom in" id="zoomIn">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M12 5v14m-7-7h14" />
+                  </svg></button
+                ><button class="map-tool" title="Zoom out" id="zoomOut">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <path d="M5 12h14" />
+                  </svg></button
+                ><button class="map-tool" title="Reset map" id="resetMap">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  >
+                    <path d="M3 12a9 9 0 1 0 3-6.7L3 8m0-5v5h5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <label class="map-search"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m16 16 4 4" /></svg
+              ><input
+                id="mapSearch"
+                placeholder="Search a saved listing or address..."
+              /><button type="button" id="searchBtn">Search</button></label
+            >
+            <div class="map" id="map">
+              <div
+                id="mapCanvas"
+                role="application"
+                aria-label="Interactive map of listing locations"
+              ></div>
+              <button class="use-location" id="useLocation" type="button">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 2v3m0 14v3m10-10h-3M5 12H2m17.1-7.1-2.1 2.1M7 17l-2.1 2.1m14.2 0L17 17M7 7 4.9 4.9"
+                  />
+                </svg>
+                Use my location
+              </button>
+              <div class="map-legend">
+                <span class="legend-item"
+                  ><i class="legend-dot"></i>Restaurant</span
+                >
+                <span class="legend-item"
+                  ><i class="legend-dot air"></i>Airbnb stay</span
+                >
+                <span class="legend-item"
+                  ><i class="legend-dot selected"></i>Click map to set listing
+                  pin</span
+                >
+              </div>
+            </div>
+            <div class="map-footer">
+              <span
+                ><span style="color: #398457">●</span>
+                <span id="mapResult"
+                  >64 locations across the Philippines</span
+                ></span
+              >
+              <div class="coordinate-readout">
+                <span>LAT <b id="readLat">14.5995° N</b></span
+                ><span>LNG <b id="readLng">120.9842° E</b></span>
+              </div>
+            </div>
+          </section>
+          <aside class="right-stack">
+            <section class="panel feature-panel">
+              <div class="panel-head">
+                <div>
+                  <div class="panel-title">Featured restaurants</div>
+                  <div class="panel-subtitle">Loved by local explorers</div>
+                </div>
+                <button class="small-link">See all →</button>
+              </div>
+              <article class="feature">
+                <img
+                  src="assets/pasyalbg.jpg"
+                  alt="Warmly lit Filipino restaurant"
+                />
+                <div class="feature-info">
+                  <div class="feature-name">Harbor &amp; Hearth</div>
+                  <div class="feature-loc">📍 Intramuros, Manila</div>
+                  <div class="feature-rating">
+                    <span class="stars">★★★★★</span> 4.9
+                    <span style="color: #a5aca6">(128)</span>
+                  </div>
+                  <div class="feature-actions">
+                    <button
+                      class="mini-btn"
+                      data-toast="Editing Harbor & Hearth"
+                    >
+                      Edit</button
+                    ><button
+                      class="mini-btn outline"
+                      data-toast="Opening Harbor & Hearth"
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
+              </article>
+              <article class="feature">
+                <img
+                  src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=220&h=160&fit=crop"
+                  alt="Filipino restaurant dining room"
+                />
+                <div class="feature-info">
+                  <div class="feature-name">Kubo ni Maria</div>
+                  <div class="feature-loc">📍 Poblacion, Makati</div>
+                  <div class="feature-rating">
+                    <span class="stars">★★★★★</span> 4.8
+                    <span style="color: #a5aca6">(94)</span>
+                  </div>
+                  <div class="feature-actions">
+                    <button class="mini-btn" data-toast="Editing Kubo ni Maria">
+                      Edit</button
+                    ><button
+                      class="mini-btn outline"
+                      data-toast="Opening Kubo ni Maria"
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </section>
+            <section class="panel feature-panel">
+              <div class="panel-head">
+                <div>
+                  <div class="panel-title">Featured stays</div>
+                  <div class="panel-subtitle">A little closer to paradise</div>
+                </div>
+                <button class="small-link">See all →</button>
+              </div>
+              <article class="feature">
+                <img
+                  src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=220&h=160&fit=crop"
+                  alt="Beautiful secluded cabin"
+                />
+                <div class="feature-info">
+                  <div class="feature-name">Pine &amp; Palm Hideaway</div>
+                  <div class="feature-loc">📍 Tagaytay, Cavite</div>
+                  <div class="feature-rating">
+                    <span class="stars">★★★★★</span> 4.97
+                    <span style="color: #a5aca6">(86)</span>
+                  </div>
+                  <div class="feature-price"><b>₱4,850</b> / night</div>
+                  <div class="feature-actions">
+                    <button
+                      class="mini-btn"
+                      data-toast="Editing Pine & Palm Hideaway"
+                    >
+                      Edit</button
+                    ><button
+                      class="mini-btn outline"
+                      data-toast="Opening Pine & Palm Hideaway"
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
+              </article>
+              <article class="feature">
+                <img
+                  src="https://images.unsplash.com/photo-1601918774946-25832a4be0d6?w=220&h=160&fit=crop"
+                  alt="Modern tropical holiday villa"
+                />
+                <div class="feature-info">
+                  <div class="feature-name">Casa Marikit Staycation</div>
+                  <div class="feature-loc">📍 Antipolo, Rizal</div>
+                  <div class="feature-rating">
+                    <span class="stars">★★★★★</span> 4.91
+                    <span style="color: #a5aca6">(61)</span>
+                  </div>
+                  <div class="feature-price"><b>₱3,200</b> / night</div>
+                  <div class="feature-actions">
+                    <button
+                      class="mini-btn"
+                      data-toast="Editing Casa Marikit Staycation"
+                    >
+                      Edit</button
+                    ><button
+                      class="mini-btn outline"
+                      data-toast="Opening Casa Marikit Staycation"
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </section>
+          </aside>
+        </section>
+        <section class="bottom-grid">
+          <section class="panel" id="comments">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">Recent comments</div>
+                <div class="panel-subtitle">
+                  Fresh notes from your community
+                </div>
+              </div>
+              <button class="small-link" data-nav="Comments">View all →</button>
+            </div>
+            <article class="comment">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&crop=faces"
+                alt="Ava Reyes"
+              />
+              <div class="comment-body">
+                <div class="comment-name">
+                  Ava Reyes<span class="comment-place"
+                    >on Harbor &amp; Hearth</span
+                  >
+                </div>
+                <div class="comment-stars">
+                  ★★★★★ <span style="color: #829087">5.0</span>
+                </div>
+                <div class="comment-review">
+                  “A little gem in the city! The sinigang was like having Sunday
+                  lunch at home.”
+                </div>
+              </div>
+            </article>
+            <article class="comment">
+              <img
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces"
+                alt="Miguel Cruz"
+              />
+              <div class="comment-body">
+                <div class="comment-name">
+                  Miguel Cruz<span class="comment-place"
+                    >on Pine &amp; Palm Hideaway</span
+                  >
+                </div>
+                <div class="comment-stars">
+                  ★★★★★ <span style="color: #829087">5.0</span>
+                </div>
+                <div class="comment-review">
+                  “Waking up to the lake view made the whole weekend. Already
+                  planning a return.”
+                </div>
+              </div>
+            </article>
+          </section>
+          <section class="panel" id="reports">
+            <div class="panel-head">
+              <div>
+                <div class="panel-title">
+                  Recent reports
+                  <span
+                    style="color: #cf7659; font-size: 10px; margin-left: 4px"
+                    >3 new</span
+                  >
+                </div>
+                <div class="panel-subtitle">
+                  Community-submitted flags to review
+                </div>
+              </div>
+              <button class="small-link" data-nav="Reports">View all →</button>
+            </div>
+            <article class="report">
+              <span class="report-badge amber">Location</span>
+              <div class="report-body">
+                <div class="report-name">Incorrect location</div>
+                <div class="report-meta">
+                  The Sunday Table · Quezon City · 18 min ago
+                </div>
+              </div>
+              <button class="mini-btn" data-toast="Location report opened">
+                Review
+              </button>
+            </article>
+            <article class="report">
+              <span class="report-badge red">Closed</span>
+              <div class="report-body">
+                <div class="report-name">Business permanently closed</div>
+                <div class="report-meta">
+                  Old Town Bakery · Cebu City · 1 hr ago
+                </div>
+              </div>
+              <button class="mini-btn" data-toast="Closure report opened">
+                Review
+              </button>
+            </article>
+            <article class="report">
+              <span class="report-badge">Fake</span>
+              <div class="report-body">
+                <div class="report-name">Suspected duplicate listing</div>
+                <div class="report-meta">
+                  Seaside View Lodge · Palawan · 3 hrs ago
+                </div>
+              </div>
+              <button class="mini-btn" data-toast="Listing report opened">
+                Review
+              </button>
+            </article>
+          </section>
+        </section>
+        <section class="panel table-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Recent listings</div>
+              <div class="panel-subtitle">
+                Your latest additions and updates
+              </div>
+            </div>
+            <button class="small-link" data-all-listings>
+              View all listings →
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Business / stay</th>
+                  <th>Type</th>
+                  <th>Location</th>
+                  <th>Rating</th>
+                  <th>Status</th>
+                  <th>Added</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="listingRows">
+                <tr>
+                  <td>
+                    <div class="listing-cell">
+                      <img
+                        src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=80&h=80&fit=crop"
+                        alt=""
+                      /><span>Harbor &amp; Hearth</span>
+                    </div>
+                  </td>
+                  <td><span class="type-pill">Restaurant</span></td>
+                  <td>Intramuros, Manila</td>
+                  <td><span class="stars">★</span> 4.9</td>
+                  <td><span class="status-pill active">Active</span></td>
+                  <td>Oct 18, 2026</td>
+                  <td>
+                    <div class="table-actions">
+                      <button data-toast="Editing Harbor & Hearth">Edit</button
+                      ><button class="delete" data-delete="Harbor & Hearth">
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="listing-cell">
+                      <img
+                        src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=80&h=80&fit=crop"
+                        alt=""
+                      /><span>Pine &amp; Palm Hideaway</span>
+                    </div>
+                  </td>
+                  <td><span class="type-pill air">Airbnb</span></td>
+                  <td>Tagaytay, Cavite</td>
+                  <td><span class="stars">★</span> 4.97</td>
+                  <td><span class="status-pill active">Active</span></td>
+                  <td>Oct 17, 2026</td>
+                  <td>
+                    <div class="table-actions">
+                      <button data-toast="Editing Pine & Palm Hideaway">
+                        Edit</button
+                      ><button
+                        class="delete"
+                        data-delete="Pine & Palm Hideaway"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="listing-cell">
+                      <img
+                        src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=80&h=80&fit=crop"
+                        alt=""
+                      /><span>Casa Marikit Staycation</span>
+                    </div>
+                  </td>
+                  <td><span class="type-pill air">Airbnb</span></td>
+                  <td>Antipolo, Rizal</td>
+                  <td><span class="stars">★</span> 4.91</td>
+                  <td><span class="status-pill pending">Pending</span></td>
+                  <td>Oct 16, 2026</td>
+                  <td>
+                    <div class="table-actions">
+                      <button data-toast="Editing Casa Marikit Staycation">
+                        Edit</button
+                      ><button
+                        class="delete"
+                        data-delete="Casa Marikit Staycation"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-bottom">
+            <span id="rowCount">Showing 3 of 434 listings</span>
+            <div class="pages" id="listingPages"></div>
+          </div>
+        </section>
+        <section class="panel table-panel" id="usersPanel" hidden>
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">App user profiles</div>
+              <div class="panel-subtitle">
+                Profile records stored in Realtime Database at /users
+              </div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="userRows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel table-panel" id="settingsPanel" hidden>
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Dashboard settings</div>
+              <div class="panel-subtitle">
+                Firebase project and database locations used by this page
+              </div>
+            </div>
+          </div>
+          <div class="settings-body">
+            <div><span>Project</span><b>pasyalphadmin</b></div>
+            <div><span>Restaurants</span><code>/restaurants</code></div>
+            <div><span>Airbnb listings</span><code>/airbnbListings</code></div>
+            <div><span>Comments</span><code>/comments</code></div>
+            <div><span>Reports</span><code>/reports</code></div>
+            <div><span>User profiles</span><code>/users</code></div>
+            <p>
+              Update paths in <code>firebase-config.js</code> to match the JSON
+              tree used by your mobile app. Keep access restricted with Firebase
+              Authentication and Realtime Database rules.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <section
+      class="profile-modal"
+      id="profileModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="profileTitle"
+      hidden
+    >
+      <form class="profile-dialog" id="profileForm">
+        <div class="profile-dialog-head">
+          <div>
+            <h2 id="profileTitle">Edit your profile</h2>
+            <p>Update the name and photo shown in your admin dashboard.</p>
+          </div>
+          <button
+            class="icon-btn"
+            id="closeProfile"
+            type="button"
+            aria-label="Close profile editor"
+          >
+            ×
+          </button>
+        </div>
+        <div class="profile-photo-row">
+          <img
+            id="profilePreview"
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces"
+            alt="Profile photo preview"
+          />
+          <label class="profile-upload-button" for="profilePhotoFile">
+            Upload photo
+            <input
+              id="profilePhotoFile"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              hidden
+            />
+          </label>
+          <span>JPG, PNG or WebP · Max 5 MB</span>
+        </div>
+        <label class="profile-field" for="profileName">
+          Display name
+          <input
+            id="profileName"
+            type="text"
+            maxlength="80"
+            autocomplete="name"
+            required
+          />
+        </label>
+        <label class="profile-field" for="profilePhotoUrl">
+          Profile photo URL <span>optional</span>
+          <input
+            id="profilePhotoUrl"
+            type="url"
+            placeholder="https://example.com/photo.jpg"
+          />
+        </label>
+        <label class="profile-field" for="profileEmail">
+          Account email
+          <input id="profileEmail" type="email" readonly />
+        </label>
+        <div class="profile-error" id="profileError" role="alert"></div>
+        <div class="profile-dialog-actions">
+          <button class="btn-ghost" id="cancelProfile" type="button">
+            Cancel
+          </button>
+          <button class="btn-primary" id="saveProfile" type="submit">
+            Save profile
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script type="module" src="firebase.js"></script>
+  </body>
+</html>
