@@ -16,6 +16,7 @@ export const firebaseConfig = {
 export const PATHS = {
   restaurants: "restaurants",
   stays: "airbnbListings",
+<<<<<<< HEAD
   resorts: "resorts",
   hotels: "hotels",  
   touristSpots: "touristSpots",
@@ -24,4 +25,9 @@ export const PATHS = {
   reports: "reports",
   users: "users",
   adminApplications: "adminApplications",
+=======
+  comments: "comments",
+  reports: "reports",
+  users: "users",
+>>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 };
