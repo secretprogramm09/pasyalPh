@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560" role="img" aria-labelledby="title desc">
+  <title id="title">MIT App Inventor blocks for centering the logo sprite</title>
+  <desc id="desc">Screen1.Initialize sets ImageSprite1 X to Canvas1.Width minus ImageSprite1.Width, divided by two, and sets Y to 15.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".25"/></filter>
+  </defs>
+  <rect width="1100" height="560" rx="22" fill="#1d1d1d"/>
+  <text x="42" y="48" fill="#f5f5f5" font-family="Arial,sans-serif" font-size="24" font-weight="700">MIT App Inventor · Center the logo</text>
+  <text x="42" y="78" fill="#bdbdbd" font-family="Arial,sans-serif" font-size="15">Recreate this nesting in Blocks. The math is (Canvas1.Width − ImageSprite1.Width) ÷ 2.</text>
+  <!-- initialize event -->
+  <g filter="url(#shadow)">
+    <rect x="42" y="118" width="1008" height="365" rx="13" fill="#d6a61d"/>
+    <rect x="42" y="118" width="1008" height="54" rx="13" fill="#e6b932"/>
+  </g>
+  <text x="67" y="153" fill="#202020" font-family="Arial,sans-serif" font-size="22" font-weight="700">when</text>
+  <rect x="128" y="128" width="142" height="34" rx="7" fill="#f0d786" stroke="#9c7714"/>
+  <text x="145" y="151" fill="#242424" font-family="Arial,sans-serif" font-size="18" font-weight="700">Screen1</text>
+  <text x="279" y="153" fill="#202020" font-family="Arial,sans-serif" font-size="22" font-weight="700">.Initialize</text>
+  <text x="67" y="208" fill="#292929" font-family="Arial,sans-serif" font-size="18" font-weight="700">do</text>
+  <!-- set X block -->
+  <path d="M98 193h287v48h-287q-10 0-10-10v-28q0-10 10-10z" fill="#2e9a5f" stroke="#17683c" stroke-width="2"/>
+  <text x="112" y="224" fill="#102d1b" font-family="Arial,sans-serif" font-size="17" font-weight="700">set</text>
+  <rect x="155" y="202" width="140" height="31" rx="7" fill="#72c794" stroke="#17683c"/>
+  <text x="167" y="223" fill="#102d1b" font-family="Arial,sans-serif" font-size="16" font-weight="700">ImageSprite1</text>
+  <rect x="303" y="202" width="64" height="31" rx="7" fill="#72c794" stroke="#17683c"/>
+  <text x="324" y="223" fill="#102d1b" font-family="Arial,sans-serif" font-size="16" font-weight="700">X</text>
+  <text x="378" y="225" fill="#102d1b" font-family="Arial,sans-serif" font-size="18" font-weight="700">to</text>
+  <!-- division expression -->
+  <path d="M439 185h561q10 0 10 10v42q0 10-10 10H439q-10 0-10-10v-42q0-10 10-10z" fill="#397ab7" stroke="#174d82" stroke-width="2"/>
+  <rect x="448" y="194" width="418" height="45" rx="9" fill="#88b9e8" stroke="#174d82" stroke-width="2"/>
+  <text x="641" y="224" text-anchor="middle" fill="#122d49" font-family="Arial,sans-serif" font-size="22" font-weight="700">÷</text>
+  <!-- subtraction -->
+  <rect x="465" y="198" width="157" height="37" rx="8" fill="#66a5dd" stroke="#174d82"/>
+  <rect x="472" y="201" width="128" height="31" rx="6" fill="#a8cff1" stroke="#174d82"/>
+  <text x="536" y="222" text-anchor="middle" fill="#173957" font-family="Arial,sans-serif" font-size="14" font-weight="700">Canvas1.Width</text>
+  <text x="610" y="222" fill="#12395d" font-family="Arial,sans-serif" font-size="18" font-weight="700">−</text>
+  <rect x="632" y="198" width="221" height="37" rx="8" fill="#66a5dd" stroke="#174d82"/>
+  <rect x="639" y="201" width="203" height="31" rx="6" fill="#a8cff1" stroke="#174d82"/>
+  <text x="740" y="222" text-anchor="middle" fill="#173957" font-family="Arial,sans-serif" font-size="14" font-weight="700">ImageSprite1.Width</text>
+  <!-- divisor 2 -->
+  <rect x="888" y="194" width="70" height="45" rx="9" fill="#66a5dd" stroke="#174d82" stroke-width="2"/>
+  <text x="923" y="224" text-anchor="middle" fill="#173957" font-family="Arial,sans-serif" font-size="20" font-weight="700">2</text>
+  <!-- set Y block -->
+  <path d="M98 271h287v48h-287q-10 0-10-10v-28q0-10 10-10z" fill="#2e9a5f" stroke="#17683c" stroke-width="2"/>
+  <text x="112" y="302" fill="#102d1b" font-family="Arial,sans-serif" font-size="17" font-weight="700">set</text>
+  <rect x="155" y="280" width="140" height="31" rx="7" fill="#72c794" stroke="#17683c"/>
+  <text x="167" y="301" fill="#102d1b" font-family="Arial,sans-serif" font-size="16" font-weight="700">ImageSprite1</text>
+  <rect x="303" y="280" width="64" height="31" rx="7" fill="#72c794" stroke="#17683c"/>
+  <text x="324" y="301" fill="#102d1b" font-family="Arial,sans-serif" font-size="16" font-weight="700">Y</text>
+  <text x="378" y="303" fill="#102d1b" font-family="Arial,sans-serif" font-size="18" font-weight="700">to</text>
+  <rect x="429" y="271" width="74" height="48" rx="10" fill="#397ab7" stroke="#174d82" stroke-width="2"/>
+  <text x="466" y="302" text-anchor="middle" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="700">15</text>
+  <!-- explanatory connector -->
+  <path d="M221 360v38h570v-94" fill="none" stroke="#d5d5d5" stroke-width="2" stroke-dasharray="6 6"/>
+  <circle cx="791" cy="304" r="5" fill="#d5d5d5"/>
+  <rect x="175" y="399" width="748" height="55" rx="12" fill="#2a2a2a" stroke="#484848"/>
+  <text x="549" y="433" text-anchor="middle" fill="#f1f1f1" font-family="Arial,sans-serif" font-size="17">Division’s left input = subtraction; division’s right input = 2</text>
+  <text x="42" y="526" fill="#a9a9a9" font-family="Arial,sans-serif" font-size="14">After this, add the float Clock blocks separately.</text>
+</svg>

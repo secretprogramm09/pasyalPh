@@ -1,0 +1,27 @@
+{
+  "rules": {
+    ".read": "auth != null && (auth.uid === 'vyBq2UvRFIOp2MC48R6lx2oiKkr1' || auth.uid === 'rPPwffK6e5hrgnw9smOvse2NCvD2' || auth.token.admin === true)",
+    ".write": "auth != null && (auth.uid === 'vyBq2UvRFIOp2MC48R6lx2oiKkr1' || auth.uid === 'rPPwffK6e5hrgnw9smOvse2NCvD2' || auth.token.admin === true)",
+    "adminApplications": {
+      "$applicationId": {
+        ".write": "!data.exists()",
+        ".validate": "newData.hasChildren(['name', 'email', 'reason', 'status', 'createdAt']) && newData.numChildren() === 5 && newData.child('status').val() === 'pending'",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 80"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().length > 3 && newData.val().length <= 254"
+        },
+        "reason": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 1000"
+        },
+        "status": {
+          ".validate": "newData.val() === 'pending'"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        }
+      }
+    }
+  }
+}
