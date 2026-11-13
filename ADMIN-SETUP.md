@@ -15,6 +15,16 @@ In the `pasyalph` Vercel project, add these Production environment variables:
   Project settings → Service accounts → Generate new private key. Store this
   only as a Vercel environment variable; never commit the key to the repository
   or share it in chat.
+- `MOBILE_FIREBASE_SERVICE_ACCOUNT`: the complete JSON contents of a service
+  account key for the `pasyalph-a848d` Firebase project. The
+  `/api/business-applications` endpoint uses this separate named Firebase Admin
+  app only to verify ID tokens issued by the mobile project. Never expose or
+  commit this key.
+- `FIREBASE_DATABASE_URL` (optional): the admin Realtime Database URL. It
+  defaults to the `pasyalphadmin` database URL in this repository and is useful
+  if the admin database location changes.
+- `ADMIN_ALLOWED_ORIGIN` (optional): the allowed mobile web origin for CORS.
+  It defaults to `*`; bearer-token requests do not use cookies.
 - `CRON_SECRET`: a long, random secret used to authorize Vercel's scheduled
   Trash cleanup. Keep it private and configure it in the same Vercel environment.
 - `GROQ_API_KEY`: the secret key for the Pasyal AI sidebar assistant. Create it
@@ -78,3 +88,22 @@ The dashboard reads `/adminApplications` and shows each request under **Admin
 Applications**. The configured head admin can choose **Create admin** to fill
 the account form from the request. Completing account creation marks that
 request approved.
+
+## Receive business applications from the mobile app
+
+The mobile app must send its Firebase ID token as
+`Authorization: Bearer <ID_TOKEN>` to `/api/business-applications`.
+
+- `GET` returns only the application stored at
+  `/businessApplications/<the-token-UID>`.
+- `POST` validates and upserts the caller's application at that same path.
+  The request body must contain `ownerId`, `legalName`, `businessName`,
+  `category`, `address`, `phone`, `permitReference`, `description`,
+  `submittedAt`, and `status: "Pending review"`; `ownerId` must match the
+  verified token UID.
+
+The admin dashboard lists these records separately under **Business
+Applications**. Approving updates `status: "Approved"`, `updatedAt`, and
+`reviewedBy`; rejecting uses `status: "Rejected"`. This contract has no
+listing-details object, so approval does not create a listing. If a future
+contract adds one, it must be handled explicitly before creating a listing.

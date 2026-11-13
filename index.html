@@ -21,13 +21,7 @@
     <link rel="stylesheet" href="dashboard.css" />
     <link
       rel="stylesheet"
-<<<<<<< HEAD
       href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css"
-=======
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     />
   </head>
   <body>
@@ -127,13 +121,10 @@
               <path d="m12 3 10 18H2z" />
               <path d="M12 9v5m0 3h.01" /></svg
             >Reports<span class="count" id="reportNavCount" hidden>0</span></a
-<<<<<<< HEAD
           ><a href="#trash" data-page="Trash"
             ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
               <path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6m4 4v7m6-7v7" />
             </svg>Trash<span class="count" id="trashNavCount" hidden>0</span></a
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
           ><a href="#users" data-page="Users"
             ><svg
               viewBox="0 0 24 24"
@@ -145,13 +136,12 @@
                 d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m15 0v-2a4 4 0 0 0-3-3.87M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7-7.87a4 4 0 0 1 0 7.75"
               /></svg
             >Users</a
-<<<<<<< HEAD
           ><a href="#admin-applications" data-page="Admin Applications"
             ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
               <path d="M8 4h8l3 3v13H5V4zM8 4v5h8V4M8 15h8m-8 3h5" />
             </svg>Admin Applications<span class="count" id="adminApplicationNavCount" hidden>0</span></a
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
+          ><a href="#business-applications" data-page="Business Applications"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16v13H4zM8 7V5h8v2M8 12h8m-8 4h5" /></svg>Business Applications<span class="count" id="businessApplicationNavCount" hidden>0</span></a
           ><a href="#analytics" data-page="Analytics"
             ><svg
               viewBox="0 0 24 24"
@@ -176,7 +166,6 @@
           >
         </nav>
         <div class="side-bottom">
-<<<<<<< HEAD
           <section class="help-card ai-assistant" aria-label="Pasyal AI assistant">
             <div class="ai-assistant-heading">
               <div><strong>Pasyal AI</strong><p>Dashboard help, anytime</p></div>
@@ -199,15 +188,6 @@
               <small>Current dashboard data is shared with AI for answers. Don’t include passwords or private keys.</small>
             </div>
           </section>
-=======
-          <div class="help-card">
-            <strong>Need a hand?</strong>
-            <p>
-              Our support team is here to help you make every journey count.
-            </p>
-            <a href="mailto:hello@Pasyal.ph">Visit help center ↗</a>
-          </div>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
           <nav class="nav">
             <a href="#logout" id="logout"
               ><svg
@@ -278,13 +258,7 @@
               alt="Administrator"
             />
             <div class="admin-label">
-<<<<<<< HEAD
               <b>Maria Santos</b>
-=======
-              <b>Maria Santos</b><br /><span style="color: #929d94"
-                >Super admin</span
-              >
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
             </div>
             <button class="profile-edit-trigger" id="editProfile" type="button">
               Edit profile
@@ -308,10 +282,7 @@
             ><span id="currentDate"></span>
           </div>
         </section>
-<<<<<<< HEAD
         <section class="analytics-page" id="businessAnalytics">
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
         <section class="stats">
           <article class="stat">
             <div class="stat-top">
@@ -396,7 +367,6 @@
             </div>
           </article>
         </section>
-<<<<<<< HEAD
         <section class="panel business-analytics">
           <div class="panel-head">
             <div>
@@ -453,18 +423,12 @@
           <p class="analytics-note">Counts use the existing listings and business owner records. Averages use available ratings, and the trend uses listing creation dates.</p>
         </section>
         </section>
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
         <section class="content-grid">
           <section class="panel form-panel" id="addListing">
             <div class="panel-head">
               <div>
                 <div class="panel-title">Add a new listing</div>
-<<<<<<< HEAD
                 <div class="panel-subtitle">Add restaurants, stays, resorts, hotels, and tourist spots</div>
-=======
-                <div class="panel-subtitle">Grow the local discovery map</div>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
               </div>
               <span style="color: #79a581; font-size: 15px">＋</span>
             </div>
@@ -474,12 +438,9 @@
                 ><select id="type">
                   <option>Restaurant</option>
                   <option>Airbnb</option>
-<<<<<<< HEAD
                   <option>Resort</option>
                   <option>Hotel</option>
                   <option>Tourist Spot</option>
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
                 </select>
               </div>
               <div class="field">
@@ -502,11 +463,7 @@
                 />
                 <div class="address-actions">
                   <button class="btn-ghost address-locate" id="locateAddress" type="button">Locate address</button>
-<<<<<<< HEAD
                   <span class="address-hint" id="addressStatus">Type an address and choose a suggestion to fill the accurate address and map pin automatically.</span>
-=======
-                  <span class="address-hint" id="addressStatus">Enter a Philippine address to place its map pin.</span>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
                 </div>
                 <div class="address-results" id="addressResults" aria-live="polite"></div>
               </div>
@@ -543,7 +500,6 @@
                 </div>
               </div>
               <div class="field">
-<<<<<<< HEAD
                 <label for="imageUrl">Cover image URL <span>(optional, public image link)</span></label>
                 <input id="imageUrl" type="url" placeholder="https://example.com/image.jpg" autocomplete="url" />
                 <label class="image-file-label" for="listingImageFile">Or upload an image
@@ -552,31 +508,6 @@
                 </label>
                 <img id="coverPreview" class="upload-preview" alt="Cover image preview" hidden />
 
-=======
-                <label>Cover image</label
-                ><label class="upload" for="cover"
-                  ><span
-                    ><svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.7"
-                    >
-                      <path
-                        d="M12 16V4m0 0L8 8m4-4 4 4M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"
-                      /></svg
-                    ><br /><b>Click to upload</b> or drag an image<br /><span
-                      id="fileName"
-                      >JPG or PNG · Max 5 MB</span
-                    ></span
-                  ></label
-                ><input
-                  id="cover"
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp"
-                  hidden
-                />
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
               </div>
               <div class="button-row">
                 <button class="btn-primary" type="submit">
@@ -709,12 +640,8 @@
                   <div class="feature-actions">
                     <button
                       class="mini-btn"
-<<<<<<< HEAD
                       type="button"
                       data-feature-edit
-=======
-                      data-toast="Editing Harbor & Hearth"
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
                     >
                       Edit</button
                     ><button
@@ -739,11 +666,7 @@
                     <span style="color: #a5aca6">(94)</span>
                   </div>
                   <div class="feature-actions">
-<<<<<<< HEAD
                     <button class="mini-btn" type="button" data-feature-edit>
-=======
-                    <button class="mini-btn" data-toast="Editing Kubo ni Maria">
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
                       Edit</button
                     ><button
                       class="mini-btn outline"
@@ -944,11 +867,7 @@
             <table>
               <thead>
                 <tr>
-<<<<<<< HEAD
                   <th>Listing</th>
-=======
-                  <th>Business / stay</th>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
                   <th>Type</th>
                   <th>Location</th>
                   <th>Rating</th>
@@ -1043,7 +962,6 @@
             <div class="pages" id="listingPages"></div>
           </div>
         </section>
-<<<<<<< HEAD
         <section class="panel table-panel" id="trashPanel" hidden>
           <div class="panel-head">
             <div>
@@ -1067,8 +985,6 @@
             </table>
           </div>
         </section>
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
         <section class="panel table-panel" id="usersPanel" hidden>
           <div class="panel-head">
             <div>
@@ -1092,7 +1008,6 @@
             </table>
           </div>
         </section>
-<<<<<<< HEAD
         <section class="panel table-panel" id="adminApplicationsPanel" hidden>
           <div class="panel-head">
             <div>
@@ -1115,6 +1030,20 @@
                 </tr>
               </thead>
               <tbody id="adminApplicationRows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel table-panel" id="businessApplicationsPanel" hidden>
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Business applications</div>
+              <div class="panel-subtitle">Listing and business-owner requests submitted from the mobile app</div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Business name</th><th>Legal name</th><th>Category</th><th>Address</th><th>Phone</th><th>Permit reference</th><th>Description</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="businessApplicationRows"></tbody>
             </table>
           </div>
         </section>
@@ -1145,29 +1074,6 @@
                 <button class="btn-primary" id="createAdminButton" type="submit">Create admin account</button>
               </form>
             </section>
-=======
-        <section class="panel table-panel" id="settingsPanel" hidden>
-          <div class="panel-head">
-            <div>
-              <div class="panel-title">Dashboard settings</div>
-              <div class="panel-subtitle">
-                Firebase project and database locations used by this page
-              </div>
-            </div>
-          </div>
-          <div class="settings-body">
-            <div><span>Project</span><b>pasyalphadmin</b></div>
-            <div><span>Restaurants</span><code>/restaurants</code></div>
-            <div><span>Airbnb listings</span><code>/airbnbListings</code></div>
-            <div><span>Comments</span><code>/comments</code></div>
-            <div><span>Reports</span><code>/reports</code></div>
-            <div><span>User profiles</span><code>/users</code></div>
-            <p>
-              Update paths in <code>firebase-config.js</code> to match the JSON
-              tree used by your mobile app. Keep access restricted with Firebase
-              Authentication and Realtime Database rules.
-            </p>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
           </div>
         </section>
       </main>
@@ -1175,7 +1081,6 @@
     <div class="toast" id="toast" role="status"></div>
     <section
       class="profile-modal"
-<<<<<<< HEAD
       id="logoutConfirmModal"
       role="dialog"
       aria-modal="true"
@@ -1311,8 +1216,6 @@
     </section>
     <section
       class="profile-modal"
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       id="profileModal"
       role="dialog"
       aria-modal="true"
@@ -1385,15 +1288,7 @@
       </form>
     </section>
 
-<<<<<<< HEAD
     <script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>
-=======
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     <script type="module" src="firebase.js"></script>
   </body>
 </html>

@@ -9,10 +9,7 @@ import {
 import {
   getDatabase,
   ref,
-<<<<<<< HEAD
   get,
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   onValue,
   push,
   set,
@@ -31,11 +28,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 const storage = getStorage(app);
-<<<<<<< HEAD
 let featuredRestaurantEditor = null;
 let pendingListingDelete = null;
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const esc = (value) =>
@@ -111,7 +105,6 @@ if (brandLogoImage && brandLogoFallback) {
 }
 let toastTimer,
   listeners = [],
-<<<<<<< HEAD
   trashPurgeTimer = null,
   loadedDataPaths = new Set(),
   entries = {
@@ -125,6 +118,7 @@ let toastTimer,
     reports: [],
     users: [],
     adminApplications: [],
+    businessApplications: [],
   },
   listingFilter = "all",
   listingPage = 1;
@@ -213,45 +207,16 @@ function createSelectionMarker(lat, lng) {
   return new maplibregl.Marker({ element, anchor: "center" })
     .setLngLat([lng, lat])
     .addTo(locationMap);
-=======
-  entries = {
-    restaurants: [],
-    stays: [],
-    comments: [],
-    reports: [],
-    users: [],
-  },
-  listingFilter = "all",
-  listingPage = 1;
-const philippinesBounds = L.latLngBounds([4.3, 116], [21.5, 127.5]);
-const philippinesCenter = [12.8797, 121.774];
-const defaultPhilippinesZoom = 6;
-const locationMap = L.map("mapCanvas", {
-  zoomControl: false, maxBounds: philippinesBounds, maxBoundsViscosity: 1, minZoom: 5,
-}).setView(philippinesCenter, defaultPhilippinesZoom);
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(locationMap);
-const listingMarkers = L.layerGroup().addTo(locationMap);
-const addressSearchMarkers = L.layerGroup().addTo(locationMap);
-function setMapView(point, zoom) { locationMap.setView(point, zoom); }
-function fitMapPoints(points, maxZoom) {
-  locationMap.fitBounds(L.latLngBounds(points).pad(0.18), { maxZoom });
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 }
 let mapHasFittedListings = false;
 let fitListingsTimer;
 let selectionMarker = null;
 let addressMatches = [];
-<<<<<<< HEAD
 let addressLookupTimer = null;
 let addressLookupGeneration = 0;
 let featuredAddressLookupTimer = null;
 let featuredAddressLookupGeneration = 0;
 let featuredAddressMatches = [];
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 let coordinateSource = "";
 let resolvedAddress = "";
 function setListingLocation(lat, lng, message, source = "map") {
@@ -266,13 +231,7 @@ function setListingLocation(lat, lng, message, source = "map") {
   updateCoordinateReadout(lat, lng);
   setMapView([lat, lng], 16);
   if (selectionMarker) selectionMarker.remove();
-<<<<<<< HEAD
   selectionMarker = createSelectionMarker(lat, lng);
-=======
-  selectionMarker = L.circleMarker([lat, lng], {
-    radius: 8, color: "#ffffff", weight: 3, fillColor: "#4f7edc", fillOpacity: 1,
-  }).addTo(locationMap);
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   $("#mapResult").textContent = message;
   $("#addressStatus").textContent =
     source === "geocoded"
@@ -280,13 +239,8 @@ function setListingLocation(lat, lng, message, source = "map") {
       : "Map pin selected. Check the address and coordinates before saving.";
   return true;
 }
-<<<<<<< HEAD
 locationMap.on("click", ({ lngLat }) => {
   setListingLocation(lngLat.lat, lngLat.lng, "Map point selected · coordinates added to form");
-=======
-locationMap.on("click", ({ latlng }) => {
-  setListingLocation(latlng.lat, latlng.lng, "Map point selected · coordinates added to form");
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   $("#mapResult").textContent =
     "Selected map point · coordinates added to form";
 });
@@ -300,7 +254,6 @@ function toast(message) {
 
 const gate = document.createElement("section");
 gate.className = "auth-gate";
-<<<<<<< HEAD
 gate.innerHTML = `<div class="auth-layout">
   <section class="auth-brand-panel" aria-label="About Pasyal PH">
     <div class="auth-brand auth-brand-panel-brand">
@@ -335,35 +288,12 @@ function stopListeners() {
   listeners = [];
   if (trashPurgeTimer) clearInterval(trashPurgeTimer);
   trashPurgeTimer = null;
-=======
-gate.innerHTML = `<form class="auth-card" id="loginForm" autocomplete="off"><div class="auth-brand"><div class="auth-mark"><img src="assets/pasyal-ph-logo.jpg" alt="Pasyal PH logo"></div><div><b>Pasyal ph</b><small>ADMIN CONSOLE</small></div></div><h2>Welcome back</h2><p>Sign in with your Firebase admin account to manage live listings.</p><label for="loginEmail">Email address</label><input id="loginEmail" type="email" autocomplete="off" required placeholder="you@example.com"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="new-password" required placeholder="Your password"><button class="auth-submit" type="submit">Sign in to dashboard</button><div class="auth-error" id="loginError" role="alert"></div><div class="auth-note">Use an existing Firebase Authentication account. This page does not create accounts or store your password.</div></form>`;
-document.body.append(gate);
-document.body.classList.add("auth-open");
-document.documentElement.classList.add("auth-open");
-const status = document.createElement("div");
-status.className = "fb-status";
-status.dataset.state = "connecting";
-status.innerHTML = '<i class="fb-dot"></i><span>Connecting to Firebase…</span>';
-$(".top-actions").prepend(status);
-function setStatus(text, state = "connecting") {
-  status.dataset.state = state;
-  $("span:last-child", status).textContent = text;
-}
-function stopListeners() {
-  listeners.forEach((stop) => stop());
-  listeners = [];
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 }
 function asItems(raw) {
   if (!raw || typeof raw !== "object") return [];
   return Object.entries(raw).map(([id, value]) => ({
-<<<<<<< HEAD
     ...(value && typeof value === "object" ? value : { value }),
     id,
-=======
-    id,
-    ...(value && typeof value === "object" ? value : { value }),
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   }));
 }
 function field(item, names, fallback = "") {
@@ -391,11 +321,7 @@ function itemImage(item, type) {
         "",
       ),
     ) ||
-<<<<<<< HEAD
     (type !== "Restaurant"
-=======
-    (type === "Airbnb"
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       ? "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=220&h=160&fit=crop"
       : "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=220&h=160&fit=crop")
   );
@@ -420,7 +346,6 @@ function dateLabel(value) {
       }).format(date);
 }
 
-<<<<<<< HEAD
 function renderBusinessAnalytics() {
   const owners = entries.users.filter((user) =>
     /owner/.test(String(field(user, ["role", "userType", "accountType"], "")).toLowerCase()),
@@ -549,8 +474,6 @@ function renderBusinessAnalytics() {
   }
 }
 
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 function renderStats() {
   $("#restaurantCount").textContent =
     entries.restaurants.length.toLocaleString("en-PH");
@@ -560,11 +483,7 @@ function renderStats() {
     return ["active", "approved", "published", "visible"].includes(status);
   };
   const locations = new Set(
-<<<<<<< HEAD
     allListings()
-=======
-    [...entries.restaurants, ...entries.stays]
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       .filter(isActive)
       .map((item) => String(field(item, ["city", "province", "location", "address"], "")))
       .map((location) => location.trim().replace(/\s+/g, " ").toLowerCase())
@@ -580,14 +499,7 @@ function renderStats() {
   $("#pendingReportCount").textContent = openReports.toLocaleString("en-PH");
 }
 function renderListings() {
-<<<<<<< HEAD
   const all = allListings();
-=======
-  const all = [
-    ...entries.restaurants.map((item) => ({ ...item, _type: "Restaurant" })),
-    ...entries.stays.map((item) => ({ ...item, _type: "Airbnb" })),
-  ];
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   all.sort(
     (a, b) =>
       Number(b.createdAt || b.timestamp || 0) -
@@ -606,25 +518,16 @@ function renderListings() {
     ? recent
         .map(
           (item) =>
-<<<<<<< HEAD
             `<tr><td><div class="listing-cell"><img src="${esc(itemImage(item, item._type))}" alt=""><span>${esc(itemName(item))}</span></div></td><td><span class="type-pill ${item._type === "Restaurant" ? "" : "air"}">${esc(item._type)}</span></td><td>${esc(itemAddress(item))}</td><td>${itemRating(item) === "—" ? "—" : `<span class="stars">★</span> ${esc(itemRating(item))}`}</td><td><span class="status-pill ${String(item.status || "active").toLowerCase() === "active" ? "active" : "pending"}">${esc(item.status || "Active")}</span></td><td>${dateLabel(item.createdAt || item.timestamp)}</td><td><div class="table-actions">${String(item.status || "active").toLowerCase() === "pending" ? `<button class="approve" data-approve="${esc(item._type)}:${esc(item.id)}">Approve</button>` : ""}<button data-edit="${esc(item._type)}:${esc(item.id)}">Edit</button><button class="delete" data-delete="${esc(item._type)}:${esc(item.id)}">Delete</button></div></td></tr>`,
-=======
-            `<tr><td><div class="listing-cell"><img src="${esc(itemImage(item, item._type))}" alt=""><span>${esc(itemName(item))}</span></div></td><td><span class="type-pill ${item._type === "Airbnb" ? "air" : ""}">${item._type}</span></td><td>${esc(itemAddress(item))}</td><td>${itemRating(item) === "—" ? "—" : `<span class="stars">★</span> ${esc(itemRating(item))}`}</td><td><span class="status-pill ${String(item.status || "active").toLowerCase() === "active" ? "active" : "pending"}">${esc(item.status || "Active")}</span></td><td>${dateLabel(item.createdAt || item.timestamp)}</td><td><div class="table-actions">${String(item.status || "active").toLowerCase() === "pending" ? `<button class="approve" data-approve="${esc(item._type)}:${esc(item.id)}">Approve</button>` : ""}<button data-edit="${esc(item._type)}:${esc(item.id)}">Edit</button><button class="delete" data-delete="${esc(item._type)}:${esc(item.id)}">Delete</button></div></td></tr>`,
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
         )
         .join("")
     : '<tr><td colspan="7"><div class="empty-state">No listings found in the configured database paths.</div></td></tr>';
   $("#rowCount").textContent =
-<<<<<<< HEAD
     `Showing ${filtered.length ? start + 1 : 0}–${Math.min(start + pageSize, filtered.length)} of ${filtered.length} ${listingFilter === "all" ? "listings" : listingFilter}`;
-=======
-    `Showing ${filtered.length ? start + 1 : 0}–${Math.min(start + pageSize, filtered.length)} of ${filtered.length} ${listingFilter === "all" ? "listings" : listingFilter === "Airbnb" ? "Airbnb listings" : "restaurants"}`;
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   const pages = $("#listingPages");
   if (pages)
     pages.innerHTML = `<button data-list-page="${Math.max(1, listingPage - 1)}" aria-label="Previous page">‹</button>${Array.from({ length: pageCount }, (_, index) => `<button data-list-page="${index + 1}" class="${listingPage === index + 1 ? "sel" : ""}">${index + 1}</button>`).join("")}<button data-list-page="${Math.min(pageCount, listingPage + 1)}" aria-label="Next page">›</button>`;
 }
-<<<<<<< HEAD
 function renderTrash() {
   const rows = $("#trashRows");
   if (!rows) return;
@@ -647,8 +550,6 @@ function renderTrash() {
       }).join("")
     : '<tr><td colspan="6"><div class="empty-state">Trash is empty. Deleted listings will appear here for 30 days.</div></td></tr>';
 }
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 function renderFeatures() {
   const panels = $$(".right-stack .feature-panel");
   const sets = [entries.restaurants, entries.stays];
@@ -699,7 +600,6 @@ function renderUsers() {
         .join("")
     : '<tr><td colspan="4"><div class="empty-state">No user profiles found at /users.</div></td></tr>';
 }
-<<<<<<< HEAD
 function renderAdminApplications() {
   const rows = $("#adminApplicationRows");
   if (!rows) return;
@@ -723,8 +623,25 @@ function renderAdminApplications() {
         .join("")
     : '<tr><td colspan="6"><div class="empty-state">No admin applications have been submitted.</div></td></tr>';
 }
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
+function renderBusinessApplications() {
+  const rows = $("#businessApplicationRows");
+  if (!rows) return;
+  const items = [...entries.businessApplications].sort(
+    (a, b) => Number(b.updatedAt || b.createdAt || 0) - Number(a.updatedAt || a.createdAt || 0),
+  );
+  const pending = items.filter((item) => item.status === "Pending review").length;
+  const badge = $("#businessApplicationNavCount");
+  if (badge) {
+    badge.textContent = String(pending);
+    badge.hidden = pending === 0;
+  }
+  rows.innerHTML = items.length
+    ? items.map((item) => {
+        const status = item.status || "Pending review";
+        return `<tr><td>${esc(item.businessName)}</td><td>${esc(item.legalName)}</td><td>${esc(item.category)}</td><td>${esc(item.address)}</td><td>${esc(item.phone)}</td><td>${esc(item.permitReference)}</td><td>${esc(item.description)}</td><td><span class="status-pill ${status === "Pending review" ? "pending" : "active"}">${esc(status)}</span></td><td><button class="mini-btn" data-business-action="approve" data-business-id="${esc(item.id)}" ${status !== "Pending review" ? "disabled" : ""}>Approve</button> <button class="mini-btn" data-business-action="reject" data-business-id="${esc(item.id)}" ${status !== "Pending review" ? "disabled" : ""}>Reject</button></td></tr>`;
+      }).join("")
+    : '<tr><td colspan="9"><div class="empty-state">No business applications have been submitted.</div></td></tr>';
+}
 function renderReports() {
   const panel = $("#reports");
   $$(".report", panel).forEach((node) => node.remove());
@@ -810,22 +727,13 @@ function updateCoordinateReadout(lat, lng) {
   $("#readLng").textContent = formatCoordinate(lng, "lng");
 }
 function renderPins() {
-<<<<<<< HEAD
   clearMapMarkers(listingMarkers);
   const all = allListings();
-=======
-  listingMarkers.clearLayers();
-  const all = [
-    ...entries.restaurants.map((item) => ({ ...item, _type: "Restaurant" })),
-    ...entries.stays.map((item) => ({ ...item, _type: "Airbnb" })),
-  ];
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   const positioned = [];
   all.forEach((item) => {
     const coordinates = itemCoordinates(item);
     if (!coordinates) return;
     const { lat, lng } = coordinates;
-<<<<<<< HEAD
     const isStay = item._type !== "Restaurant";
     const iconSvg = isStay
       ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 11 9-8 9 8v9H3zM8 20v-6h8v6"/></svg>'
@@ -843,25 +751,6 @@ function renderPins() {
       $("#mapResult").textContent = `${itemName(item)} · ${item._type}`;
     });
     listingMarkers.push(marker);
-=======
-    const isAirbnb = item._type === "Airbnb";
-    const iconSvg = isAirbnb
-      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 11 9-8 9 8v9H3zM8 20v-6h8v6"/></svg>'
-      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 3v7a3 3 0 0 0 6 0V3M7 3v18M20 11h-7c0-4 2-8 5-8v18"/></svg>';
-    const icon = L.divIcon({
-      className: "listing-map-marker-icon",
-      html: `<span class="listing-map-marker ${isAirbnb ? "air" : ""}">${iconSvg}</span>`,
-      iconSize: [27, 27], iconAnchor: [13, 27],
-    });
-    const marker = L.marker([lat, lng], { icon }).bindPopup(
-      `<strong>${esc(itemName(item))}</strong><br>${esc(item._type)}<br>${esc(itemAddress(item))}<br>${lat.toFixed(6)}, ${lng.toFixed(6)}`,
-    );
-    marker.on("click", () => {
-      updateCoordinateReadout(lat, lng);
-      $("#mapResult").textContent = `${itemName(item)} · ${item._type}`;
-    });
-    marker.addTo(listingMarkers);
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     positioned.push([lat, lng]);
   });
   const withoutCoordinates = all.length - positioned.length;
@@ -875,31 +764,22 @@ function renderPins() {
     clearTimeout(fitListingsTimer);
     fitListingsTimer = setTimeout(() => {
       if (!positioned.length || mapHasFittedListings) return;
-<<<<<<< HEAD
       fitMapPoints(positioned, 14);
-=======
-      const bounds = L.latLngBounds(positioned);
-      locationMap.fitBounds(bounds.pad(0.18), { maxZoom: 14 });
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       mapHasFittedListings = true;
     }, 400);
   }
 }
 function renderAll() {
   renderStats();
-<<<<<<< HEAD
   renderBusinessAnalytics();
   renderListings();
   renderTrash();
-=======
-  renderListings();
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   renderFeatures();
   renderComments();
   renderReports();
   renderUsers();
-<<<<<<< HEAD
   renderAdminApplications();
+  renderBusinessApplications();
   renderPins();
   purgeExpiredTrash();
 }
@@ -929,17 +809,6 @@ function friendlyError(error, path = "") {
   if (code.includes("permission-denied")) {
     return path
       ? `You are signed in, but Firebase Realtime Database rules block access to /${path}. Add this account's Firebase UID (${auth.currentUser?.uid || "unknown"}) to the authorized admin list in Firebase Console. A Vercel account does not grant Firebase access.`
-=======
-  renderPins();
-}
-function friendlyError(error, path = "") {
-  const code = error?.code || "";
-  if (code.includes("permission-denied")) {
-    return path
-      ? "Database rules deny access to /" +
-          path +
-          ". Add this signed-in admin to your Realtime Database rules."
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       : "Firebase rules denied this request. Check the relevant Realtime Database or Storage rules.";
   }
   if (code.includes("network"))
@@ -950,20 +819,11 @@ function watch(path, key) {
   const stop = onValue(
     ref(db, path),
     (snapshot) => {
-<<<<<<< HEAD
       loadedDataPaths.add(key);
       entries[key] = asItems(snapshot.val());
       renderAll();
     },
     (error) => {
-=======
-      entries[key] = asItems(snapshot.val());
-      renderAll();
-      setStatus("Connected · live data", "connected");
-    },
-    (error) => {
-      setStatus(`Access denied: /${path}`, "error");
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       toast(friendlyError(error, path));
       console.error(`Realtime Database listener failed at /${path}`, error);
     },
@@ -972,7 +832,6 @@ function watch(path, key) {
 }
 function attachData() {
   stopListeners();
-<<<<<<< HEAD
   trashPurgeTimer = setInterval(purgeExpiredTrash, 60 * 60 * 1000);
   watch(PATHS.restaurants, "restaurants");
   watch(PATHS.stays, "stays");
@@ -984,34 +843,19 @@ function attachData() {
   watch(PATHS.reports, "reports");
   watch(PATHS.users, "users");
   watch(PATHS.adminApplications, "adminApplications");
-=======
-  setStatus("Loading live data…");
-  watch(PATHS.restaurants, "restaurants");
-  watch(PATHS.stays, "stays");
-  watch(PATHS.comments, "comments");
-  watch(PATHS.reports, "reports");
-  watch(PATHS.users, "users");
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
+  watch(PATHS.businessApplications, "businessApplications");
 }
 
 const fallbackAdminPhoto =
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces";
 let profilePreviewObjectUrl = null;
-<<<<<<< HEAD
 let profileSaveSlowTimer = null;
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 
 function applyAdminProfile(user) {
   const name = user.displayName || user.email?.split("@")[0] || "Admin";
   const info = $(".admin-label");
   if (info) {
     $("b", info).textContent = name;
-<<<<<<< HEAD
-=======
-    const role = $("span", info);
-    if (role) role.textContent = "Firebase admin";
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   }
   $("#welcomeAdminName").textContent = name;
   $(".avatar").src = safeUrl(user.photoURL) || fallbackAdminPhoto;
@@ -1031,21 +875,15 @@ function openProfileEditor() {
   $("#profilePreview").src = safeUrl(user.photoURL) || fallbackAdminPhoto;
   $("#profileError").textContent = "";
   $("#profileModal").hidden = false;
-<<<<<<< HEAD
   document.documentElement.classList.add("profile-open");
   document.body.classList.add("profile-open");
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   $("#profileName").focus();
 }
 
 function closeProfileEditor() {
   $("#profileModal").hidden = true;
-<<<<<<< HEAD
   document.documentElement.classList.remove("profile-open");
   document.body.classList.remove("profile-open");
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   if (profilePreviewObjectUrl) {
     URL.revokeObjectURL(profilePreviewObjectUrl);
     profilePreviewObjectUrl = null;
@@ -1062,7 +900,6 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !$("#profileModal").hidden) {
     closeProfileEditor();
   }
-<<<<<<< HEAD
   if (event.key === "Escape" && !$("#featuredRestaurantModal").hidden) {
     closeFeaturedRestaurantEditor();
   }
@@ -1075,8 +912,6 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !$("#listingViewModal").hidden) {
     closeListingView();
   }
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 });
 $("#profilePhotoFile").addEventListener("change", (event) => {
   const file = event.target.files[0];
@@ -1117,7 +952,6 @@ $("#profileForm").addEventListener("submit", async (event) => {
     $("#profileError").textContent = "Use a JPG, PNG, or WebP image.";
     return;
   }
-<<<<<<< HEAD
   if (!file && name === (user.displayName || "") && photoUrl === (user.photoURL || "")) {
     closeProfileEditor();
     toast("No profile changes to save");
@@ -1134,11 +968,6 @@ $("#profileForm").addEventListener("submit", async (event) => {
         "Firebase is taking longer than usual. Keep this window open while it finishes.";
     }
   }, 10000);
-=======
-  button.disabled = true;
-  button.textContent = "Saving…";
-  $("#profileError").textContent = "";
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   try {
     await updateProfile(user, {
       displayName: name,
@@ -1148,10 +977,7 @@ $("#profileForm").addEventListener("submit", async (event) => {
 
     if (file) {
       try {
-<<<<<<< HEAD
         button.textContent = "Uploading photo...";
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
         const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const imageRef = storageRef(
           storage,
@@ -1176,11 +1002,8 @@ $("#profileForm").addEventListener("submit", async (event) => {
   } catch (error) {
     $("#profileError").textContent = friendlyError(error);
   } finally {
-<<<<<<< HEAD
     clearTimeout(profileSaveSlowTimer);
     profileSaveSlowTimer = null;
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     button.disabled = false;
     button.textContent = "Save profile";
   }
@@ -1212,18 +1035,11 @@ loginForm.addEventListener("submit", async (event) => {
   button.disabled = true;
   button.textContent = "Signing in…";
   $("#loginError").textContent = "";
-<<<<<<< HEAD
   const email = $("#loginEmail").value.trim();
   try {
     await signInWithEmailAndPassword(
       auth,
       email,
-=======
-  try {
-    await signInWithEmailAndPassword(
-      auth,
-      $("#loginEmail").value.trim(),
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       $("#loginPassword").value,
     );
   } catch (error) {
@@ -1246,7 +1062,6 @@ onAuthStateChanged(auth, (user) => {
     gate.hidden = true;
     gate.style.display = "none";
     applyAdminProfile(user);
-<<<<<<< HEAD
     updateAdminCreateAccess(user);
     attachData();
   } else {
@@ -1255,22 +1070,6 @@ onAuthStateChanged(auth, (user) => {
     closeLogoutConfirmation();
     if (!$("#featuredRestaurantModal").hidden) closeFeaturedRestaurantEditor();
     if (!$("#listingViewModal").hidden) closeListingView();
-=======
-    let out = $(".auth-signout");
-    if (!out) {
-      out = document.createElement("button");
-      out.className = "auth-signout";
-      out.textContent = "Sign out";
-      out.addEventListener("click", async () => {
-        await signOut(auth);
-        toast("Signed out");
-      });
-      $(".top-actions").append(out);
-    }
-    attachData();
-  } else {
-    resetLoginForm();
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     document.body.classList.add("auth-open");
     document.documentElement.classList.add("auth-open");
     if (!$("#profileModal").hidden) closeProfileEditor();
@@ -1278,7 +1077,6 @@ onAuthStateChanged(auth, (user) => {
     entries = {
       restaurants: [],
       stays: [],
-<<<<<<< HEAD
       resorts: [],
       hotels: [],
       touristSpots: [],
@@ -1287,6 +1085,7 @@ onAuthStateChanged(auth, (user) => {
       reports: [],
       users: [],
       adminApplications: [],
+      businessApplications: [],
     };
     loadedDataPaths.clear();
     renderAll();
@@ -1364,16 +1163,6 @@ $("#adminCreateForm").addEventListener("submit", async (event) => {
   } finally {
     button.disabled = false;
     button.textContent = "Create admin account";
-=======
-      comments: [],
-      reports: [],
-      users: [],
-    };
-    renderAll();
-    gate.hidden = false;
-    gate.style.display = "grid";
-    setStatus("Sign in required", "connecting");
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   }
 });
 
@@ -1401,8 +1190,8 @@ $("#nav").addEventListener("click", (event) => {
     Comments: "#comments",
     Reports: "#reports",
     Users: "#usersPanel",
-<<<<<<< HEAD
     "Admin Applications": "#adminApplicationsPanel",
+    "Business Applications": "#businessApplicationsPanel",
     Trash: "#trashPanel",
     Settings: "#settingsPanel",
     Analytics: "#businessAnalytics",
@@ -1413,7 +1202,25 @@ $("#nav").addEventListener("click", (event) => {
     targetNode.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
+async function reviewBusinessApplication(applicationId, action) {
+  const application = entries.businessApplications.find((item) => item.id === applicationId);
+  if (!application || !["approve", "reject"].includes(action)) return;
+  if (application.status !== "Pending review") return;
+  const status = action === "approve" ? "Approved" : "Rejected";
+  try {
+    await update(ref(db, `${PATHS.businessApplications}/${applicationId}`), { status, updatedAt: new Date().toISOString(), reviewedBy: auth.currentUser.uid });
+    toast(status === "Approved" ? "Business application approved." : "Business application rejected.");
+  } catch (error) {
+    toast(friendlyError(error, PATHS.businessApplications));
+    console.error("Could not review business application", error);
+  }
+}
 document.addEventListener("click", (event) => {
+  const businessButton = event.target.closest("[data-business-action]");
+  if (businessButton) {
+    reviewBusinessApplication(businessButton.dataset.businessId, businessButton.dataset.businessAction);
+    return;
+  }
   const button = event.target.closest("[data-create-from-application]");
   if (!button) return;
   const application = entries.adminApplications.find(
@@ -1430,12 +1237,6 @@ document.addEventListener("click", (event) => {
   $("#adminCreateError").textContent = "";
   $("#nav [data-page='Settings']").click();
   $("#newAdminPassword").focus({ preventScroll: true });
-=======
-    Settings: "#settingsPanel",
-    Analytics: ".stats",
-  }[page];
-  if (target) $(target).scrollIntoView({ behavior: "smooth", block: "center" });
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 });
 $$("[data-nav]").forEach((button) =>
   button.addEventListener("click", () => {
@@ -1446,7 +1247,6 @@ $$("[data-nav]").forEach((button) =>
 $("#mobileMenu").addEventListener("click", () =>
   $("#sidebar").classList.toggle("open"),
 );
-<<<<<<< HEAD
 function openLogoutConfirmation() {
   $("#logoutConfirmError").textContent = "";
   $("#logoutConfirmModal").hidden = false;
@@ -1684,6 +1484,7 @@ function buildAiDashboardContext() {
     reports: entries.reports,
     users: entries.users,
     adminApplications: entries.adminApplications,
+    businessApplications: entries.businessApplications,
   };
   return JSON.stringify({
     snapshotAt: new Date().toISOString(),
@@ -1776,11 +1577,6 @@ $("#confirmLogout").addEventListener("click", async (event) => {
     button.textContent = originalLabel;
     $("#cancelLogout").disabled = false;
   }
-=======
-$("#logout").addEventListener("click", async (event) => {
-  event.preventDefault();
-  await signOut(auth);
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 });
 document.addEventListener("click", async (event) => {
   if (!event.target.closest("#sidebar") && !event.target.closest("#mobileMenu"))
@@ -1807,7 +1603,6 @@ document.addEventListener("click", async (event) => {
     renderListings();
     return;
   }
-<<<<<<< HEAD
   const featuredEdit = event.target.closest("[data-feature-edit]");
   if (featuredEdit) {
     const card = featuredEdit.closest(".feature");
@@ -1848,15 +1643,6 @@ document.addEventListener("click", async (event) => {
     const [kind, id] = approve.dataset.approve.split(":", 2);
     const path = listingSource(kind).path;
     const item = findListing(kind, id);
-=======
-  const approve = event.target.closest("[data-approve]");
-  if (approve) {
-    const [kind, id] = approve.dataset.approve.split(":", 2);
-    const path = kind === "Airbnb" ? PATHS.stays : PATHS.restaurants;
-    const item = (kind === "Airbnb" ? entries.stays : entries.restaurants).find(
-      (record) => record.id === id,
-    );
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     if (!item || String(item.status || "").toLowerCase() !== "pending") return;
     approve.disabled = true;
     approve.textContent = "Approving…";
@@ -1875,7 +1661,6 @@ document.addEventListener("click", async (event) => {
   }
   const edit = event.target.closest("[data-edit]");
   if (edit) {
-<<<<<<< HEAD
     const [kind, id] = edit.dataset.edit.split(":", 2);
     const path = listingSource(kind).path;
     const item = findListing(kind, id);
@@ -1934,48 +1719,11 @@ document.addEventListener("click", async (event) => {
     document.documentElement.classList.add("profile-open");
     document.body.classList.add("profile-open");
     $("#cancelListingDelete").focus();
-=======
-    const [kind, id] = edit.dataset.edit.split(":", 2),
-      air = kind === "Airbnb",
-      path = air ? PATHS.stays : PATHS.restaurants,
-      item = (air ? entries.stays : entries.restaurants).find(
-        (record) => record.id === id,
-      );
-    if (!item) return;
-    const name = prompt("Listing name", itemName(item));
-    if (name === null) return;
-    const address = prompt("Address", itemAddress(item));
-    if (address === null) return;
-    const description = prompt(
-      "Description",
-      field(item, ["description", "details"], ""),
-    );
-    if (description === null) return;
-    const nameKey =
-        ["name", "title", "businessName", "listingName"].find(
-          (key) => key in item,
-        ) || "name",
-      addressKey =
-        ["address", "location"].find((key) => key in item) || "address",
-      descriptionKey =
-        ["description", "details"].find((key) => key in item) || "description";
-    try {
-      await update(ref(db, `${path}/${id}`), {
-        [nameKey]: name,
-        [addressKey]: address,
-        [descriptionKey]: description,
-      });
-      toast(`${name} updated in Firebase`);
-    } catch (error) {
-      toast(friendlyError(error));
-    }
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     return;
   }
   const del = event.target.closest("[data-delete]");
   if (del) {
     const [kind, id] = del.dataset.delete.split(":", 2);
-<<<<<<< HEAD
     const path = listingSource(kind).path;
     const item = findListing(kind, id);
     if (!item) return;
@@ -1991,39 +1739,13 @@ document.addEventListener("click", async (event) => {
     document.documentElement.classList.add("profile-open");
     document.body.classList.add("profile-open");
     $("#cancelListingDelete").focus();
-=======
-    const path = kind === "Airbnb" ? PATHS.stays : PATHS.restaurants;
-    const item = (kind === "Airbnb" ? entries.stays : entries.restaurants).find(
-      (record) => record.id === id,
-    );
-    if (
-      !item ||
-      !confirm(
-        `Delete “${itemName(item)}” from Firebase? This cannot be undone.`,
-      )
-    )
-      return;
-    try {
-      await remove(ref(db, `${path}/${id}`));
-      toast(`${itemName(item)} deleted`);
-    } catch (error) {
-      toast(friendlyError(error));
-    }
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     return;
   }
   const view = event.target.closest("[data-view]");
   if (view) {
     const [kind, id] = view.dataset.view.split(":", 2);
-<<<<<<< HEAD
     const item = findListing(kind, id);
     if (item) openListingView(item, kind);
-=======
-    const item = (kind === "Airbnb" ? entries.stays : entries.restaurants).find(
-      (record) => record.id === id,
-    );
-    if (item) toast(`${itemName(item)} · ${itemAddress(item)}`);
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   }
   const resolve = event.target.closest("[data-resolve-report]");
   if (resolve) {
@@ -2059,7 +1781,6 @@ document.addEventListener("click", async (event) => {
   }
 });
 
-<<<<<<< HEAD
 function closeFeaturedRestaurantEditor() {
   $("#featuredRestaurantModal").hidden = true;
   $("#featuredRestaurantImageUrl").value = "";
@@ -2204,16 +1925,6 @@ $("#resetMap").addEventListener("click", () => {
   $("#mapSearch").value = "";
   $("#mapResult").textContent =
     `${allListings().length} listings loaded`;
-=======
-$("#zoomIn").addEventListener("click", () => locationMap.zoomIn());
-$("#zoomOut").addEventListener("click", () => locationMap.zoomOut());
-$("#resetMap").addEventListener("click", () => {
-  addressSearchMarkers.clearLayers();
-  setMapView(philippinesCenter, defaultPhilippinesZoom);
-  $("#mapSearch").value = "";
-  $("#mapResult").textContent =
-    `${entries.restaurants.length + entries.stays.length} listings loaded`;
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 });
 $("#searchBtn").addEventListener("click", async () => {
   const query = $("#mapSearch").value.trim();
@@ -2221,13 +1932,8 @@ $("#searchBtn").addEventListener("click", async () => {
     toast("Search for a saved listing name or address");
     return;
   }
-<<<<<<< HEAD
   clearMapMarkers(addressSearchMarkers);
   const matches = allListings().filter((item) =>
-=======
-  addressSearchMarkers.clearLayers();
-  const matches = [...entries.restaurants, ...entries.stays].filter((item) =>
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     `${itemName(item)} ${itemAddress(item)}`
       .toLowerCase()
       .includes(query.toLowerCase()),
@@ -2246,7 +1952,6 @@ $("#searchBtn").addEventListener("click", async () => {
       const results = await nominatimSearch(query, 5);
       if (!results.length) throw new Error("No matching Philippine address found.");
       addressMatches = results;
-<<<<<<< HEAD
       const points = results.map((result) => [
         Number(result.lat),
         Number(result.lon),
@@ -2259,11 +1964,6 @@ $("#searchBtn").addEventListener("click", async () => {
           ),
         );
       });
-=======
-      const points = results.map((result) => [Number(result.lat), Number(result.lon)]);
-      results.forEach((result) => L.marker([Number(result.lat), Number(result.lon)])
-        .bindPopup(esc(result.display_name)).addTo(addressSearchMarkers));
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       if (points.length === 1) setMapView(points[0], 15);
       else fitMapPoints(points, 15);
       updateCoordinateReadout(points[0][0], points[0][1]);
@@ -2310,13 +2010,7 @@ $("#useLocation").addEventListener("click", () => {
       updateCoordinateReadout(lat, lng);
       setMapView([lat, lng], 16);
       if (selectionMarker) selectionMarker.remove();
-<<<<<<< HEAD
       selectionMarker = createSelectionMarker(lat, lng);
-=======
-      selectionMarker = L.circleMarker([lat, lng], {
-        radius: 8, color: "#ffffff", weight: 3, fillColor: "#4f7edc", fillOpacity: 1,
-      }).addTo(locationMap);
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       $("#mapResult").textContent =
         "Current location · coordinates added to form";
       toast("Current coordinates added to the listing form");
@@ -2352,18 +2046,13 @@ function nominatimSearch(address, limit = 5) {
   return request;
 }
 
-<<<<<<< HEAD
 async function locateListingAddress(automatic = false, generation = ++addressLookupGeneration) {
-=======
-async function locateListingAddress() {
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   const address = $("#address").value.trim();
   const button = $("#locateAddress");
   const results = $("#addressResults");
   addressMatches = [];
 
   if (!address) {
-<<<<<<< HEAD
     if (!automatic) {
       toast("Enter the listing address first.");
       $("#address").focus();
@@ -2385,22 +2074,6 @@ async function locateListingAddress() {
       $("#addressStatus").textContent =
         "No Philippine match found. Add the city or province, or place the pin manually on the map.";
       if (!automatic) toast("No matching location found in the Philippines.");
-=======
-    toast("Enter the listing address first.");
-    $("#address").focus();
-    return false;
-  }
-  button.disabled = true;
-  button.textContent = "Locating…";
-  results.replaceChildren();
-  $("#addressStatus").textContent = "Searching Philippine addresses…";
-  try {
-    addressMatches = await nominatimSearch(address, 5);
-    if (!addressMatches.length) {
-      $("#addressStatus").textContent =
-        "No Philippine match found. Add the city or province, or place the pin manually on the map.";
-      toast("No matching location found in the Philippines.");
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       return false;
     }
     addressMatches.forEach((feature, index) => {
@@ -2413,7 +2086,6 @@ async function locateListingAddress() {
     });
     $("#addressStatus").textContent =
       addressMatches.length === 1
-<<<<<<< HEAD
         ? "Choose the matching address to fill the accurate address and map pin."
         : `${addressMatches.length} suggestions · choose the correct address to fill the map pin.`;
     return true;
@@ -2434,22 +2106,6 @@ async function locateListingAddress() {
 }
 
 $("#locateAddress").addEventListener("click", () => locateListingAddress());
-=======
-        ? "Choose the matching result to set the pin and coordinates."
-        : `${addressMatches.length} matching results · choose the correct location to set the pin.`;
-    return true;
-  } catch (error) {
-    $("#addressStatus").textContent = error.message;
-    toast(error.message);
-    return false;
-  } finally {
-    button.disabled = false;
-    button.textContent = "Locate address";
-  }
-}
-
-$("#locateAddress").addEventListener("click", locateListingAddress);
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 $("#address").addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -2457,13 +2113,10 @@ $("#address").addEventListener("keydown", (event) => {
   }
 });
 $("#address").addEventListener("input", () => {
-<<<<<<< HEAD
   clearTimeout(addressLookupTimer);
   const generation = ++addressLookupGeneration;
   $("#locateAddress").disabled = false;
   $("#locateAddress").textContent = "Locate address";
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   $("#addressResults").replaceChildren();
   if (coordinateSource === "geocoded" && $("#address").value.trim() !== resolvedAddress) {
     $("#lat").value = "";
@@ -2472,7 +2125,6 @@ $("#address").addEventListener("input", () => {
     resolvedAddress = "";
     if (selectionMarker) selectionMarker.remove();
     selectionMarker = null;
-<<<<<<< HEAD
     $("#addressStatus").textContent = "Address changed. Choose an address suggestion to refresh its pin.";
   }
   const address = $("#address").value.trim();
@@ -2481,9 +2133,6 @@ $("#address").addEventListener("input", () => {
     addressLookupTimer = setTimeout(() => locateListingAddress(true, generation), 900);
   } else if (!address) {
     $("#addressStatus").textContent = "Map coordinates are optional; listings can be saved without a pin.";
-=======
-    $("#addressStatus").textContent = "Address changed. Locate it again to refresh the pin.";
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   }
 });
 $("#addressResults").addEventListener("click", (event) => {
@@ -2493,7 +2142,6 @@ $("#addressResults").addEventListener("click", (event) => {
   if (!feature) return;
   const lat = Number(feature.lat);
   const lng = Number(feature.lon);
-<<<<<<< HEAD
   $("#address").value = feature.display_name || $("#address").value.trim();
   addressLookupGeneration++;
   clearTimeout(addressLookupTimer);
@@ -2577,17 +2225,6 @@ $("#listingImageFile").addEventListener("change", (event) => {
     event.currentTarget.value = "";
     toast(error.message);
   }
-=======
-  if (setListingLocation(lat, lng, "Address match selected · pin and coordinates updated", "geocoded")) {
-    $("#addressResults").replaceChildren();
-    toast("Address located. Verify the pin and coordinates before saving.");
-  }
-});
-
-$("#cover").addEventListener("change", (event) => {
-  $("#fileName").textContent =
-    event.target.files[0]?.name || "JPG or PNG · Max 5 MB";
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
 });
 $("#listingForm").addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -2599,7 +2236,6 @@ $("#listingForm").addEventListener("submit", async (event) => {
     button = $(".btn-primary", form),
     name = $("#name").value.trim(),
     type = $("#type").value,
-<<<<<<< HEAD
     address = $("#address").value.trim();
   const source = LISTING_SOURCES.find((listing) => listing.type === type);
   if (!source) {
@@ -2634,26 +2270,6 @@ $("#listingForm").addEventListener("submit", async (event) => {
     (!Number.isFinite(latitude) ||
       !Number.isFinite(longitude) ||
       !isInPhilippines(latitude, longitude))
-=======
-    address = $("#address").value.trim(),
-    latitude = Number($("#lat").value),
-    longitude = Number($("#lng").value),
-    isStay = type === "Airbnb",
-    path = isStay ? PATHS.stays : PATHS.restaurants;
-  if (!name || !address) return;
-  if (!$("#lat").value.trim() && !$("#lng").value.trim()) {
-    const located = await locateListingAddress();
-    if (located && addressMatches.length)
-      toast("Choose the correct address match, then save the listing again.");
-    return;
-  }
-  if (
-    !$("#lat").value.trim() ||
-    !$("#lng").value.trim() ||
-    !Number.isFinite(latitude) ||
-    !Number.isFinite(longitude) ||
-    !isInPhilippines(latitude, longitude)
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
   ) {
     toast(
       "Choose a listing point within the Philippines or enter valid coordinates.",
@@ -2663,57 +2279,29 @@ $("#listingForm").addEventListener("submit", async (event) => {
   button.disabled = true;
   button.textContent = "Saving…";
   try {
-<<<<<<< HEAD
     if (imageFile) {
       button.textContent = "Uploading image...";
       imageUrl = await uploadListingImage(imageFile);
     }
-=======
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     const newRef = push(ref(db, path));
     const record = {
       name,
       description: $("#description").value.trim(),
       address,
       contactNumber: $("#phone").value.trim(),
-<<<<<<< HEAD
       ...(imageUrl ? { imageUrl } : {}),
       ...(hasCoordinates ? { latitude, longitude } : {}),
-=======
-      latitude,
-      longitude,
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
       type,
       status: "pending",
       createdAt: Date.now(),
       createdBy: auth.currentUser.uid,
     };
-<<<<<<< HEAD
     await set(newRef, record);
 
     form.reset();
     toast(`${name} saved to Firebase`);
   } catch (error) {
     toast(friendlyError(error, path));
-=======
-    const file = $("#cover").files[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024)
-        throw new Error("Image is larger than 5 MB. Choose a smaller image.");
-      const objectRef = storageRef(
-        storage,
-        `listing-images/${newRef.key}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`,
-      );
-      await uploadBytes(objectRef, file);
-      record.imageUrl = await getDownloadURL(objectRef);
-    }
-    await set(newRef, record);
-    form.reset();
-    $("#fileName").textContent = "JPG or PNG · Max 5 MB";
-    toast(`${name} saved to Firebase`);
-  } catch (error) {
-    toast(friendlyError(error));
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     console.error("Listing save failed", error);
   } finally {
     button.disabled = false;
@@ -2727,13 +2315,8 @@ $("#listingForm").addEventListener("reset", () => {
     resolvedAddress = "";
     $("#addressResults").replaceChildren();
     $("#addressStatus").textContent =
-<<<<<<< HEAD
       "Map coordinates are optional; listings can be saved without a pin.";
     previewListingImage("#imageUrl", "#coverPreview");
-=======
-      "Enter a Philippine address to place its map pin.";
-    $("#fileName").textContent = "JPG or PNG · Max 5 MB";
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
     if (selectionMarker) selectionMarker.remove();
     selectionMarker = null;
     $("#mapResult").textContent = "Select a listing location on the map";
@@ -2742,7 +2325,3 @@ $("#listingForm").addEventListener("reset", () => {
 $("#notificationBtn").addEventListener("click", () =>
   toast(`${entries.reports.length} reports need review`),
 );
-<<<<<<< HEAD
-=======
-setStatus("Sign in required");
->>>>>>> 3a6ba5b1233ee308bd94a10d85b97da6ce1ff455
